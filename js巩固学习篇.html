@@ -1,0 +1,443 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>js巩固学习篇</title>
+<script type="text/javascript" src="js巩固学习篇.js"></script> 
+</head>
+
+<body>
+
+<!--改变图片-->
+<p>通过属性src改变图片</p>
+<img src="../img/2018-09-07_162441.png" id="changeimg" onClick="changeImage()" width="40">
+<p>点击图片</p>
+
+<br>
+<br>
+
+<p>通过事件onMouseOver/Out改变图片</p>
+<div style="width: 100px; height: 100px;">
+	<img src="../img/2018-09-07_162441.png" onMouseOver="changeOver(this)" onMouseOut="changeOut(this)" width="40">
+</div>
+<p>移动鼠标到图片</p>
+
+<br>
+<br>
+
+<p>通过事件onmousedown/up改变图片</p>
+<img src="../img/2018-09-07_162441.png" onMouseDown="down(this)" onMouseUp="up(this)" width="40">
+<p>长按图片</p>
+
+<br>
+<br>
+
+<!--事件监听addEventListener-->
+<p>事件监听addEventListener</p>
+<div id="lisdiv" style="width: 200px; height: 100px; background:#DC3F2B; text-align: center;">
+	<p id="click me">click me</p>
+	<p id="hello"></p>
+</div>
+
+<br>
+<br>
+
+<!--改变属性-->
+<p>改变属性</p>
+<p id="changetag">改变属性的值</p>
+<button onClick="changeTag()" style="height: 40px; width: 100px; color: black; font-size: 12px;">点击</button> 
+
+<br>
+<br>
+
+<!--登陆验证-->
+<p>登陆验证</p>
+账号：<input id="num" type="text" name="username"><br>
+密码：<input id="pas" type="password" name="password"><br>
+<p id="p"></p>
+<button onClick="Login()" type="button" style="height: 40px; width: 100px; color: black; font-size: 12px;">登陆</button>
+
+<br>
+<br>
+
+<!--登陆表单验证-->
+<p>登陆表单验证</p>
+<form name="LoginForm" action="" onSubmit="return LoginValidate();" method="post">
+	<p id="msg"></p>
+	账号：<input id="username" type="text" name="username" required="required"><br>
+	密码：<input id="password" type="password" name="password" required="required"><br>
+	邮箱：<input id="email" type="text" name="E-mail" required="required"><br>
+	<input type="submit" value="登陆" style="height: 40px; width: 100px; color: black; font-size: 12px;">
+	
+</form>
+
+<br>
+<br>
+
+<!--switch 语句-->
+<p>switch 语句</p>
+<button onClick="switchTest()" style="height: 40px; width: 100px; color: black; font-size: 12px;">点击</button> 
+<p id="switch"></p>
+
+<br>
+<br>
+
+<!--约束验证 DOM 方法-->
+<p>约束验证 DOM 方法</p>
+<!--required-->
+<div style="width:500px;">
+<div style="width: 250px; height: 30px; line-height: 30px;  float: left;  text-align: right;">
+	转账金额(1)：<input id="rmb1" type="number" min="1" max="200000" name="RMB1" required>
+</div>
+<div style="width: 250px; height: 30px; line-height: 1px; float: left; color: red; ">
+	<p id="rmb1msg"></p>
+</div>
+</div>
+
+<!--validity 属性-->
+<div style="width:500px;">
+<div style="width: 250px; height: 30px; line-height: 30px;  float: left;  text-align: right;">
+	转账金额(2)：<input id="rmb2" type="number" min="1" max="200000" name="RMB2">
+</div>
+<div style="width: 250px; height: 30px; line-height: 1px; float: left; color: red; ">
+	<p id="rmb2msg"></p>
+</div>
+</div>
+<br><br><br>
+<button onClick="LoginCheckValidity()" style="height: 40px; width: 100px; color: black; font-size: 12px;">验证</button>
+
+<br>
+<br>
+
+<!--JSON的转换-->
+<p>JSON的转换</p>
+<p id="json"></p>
+<button onClick="Json()" style="height: 40px; width: 100px; color: black; font-size: 12px;">点击</button>
+
+<br>
+<br>
+
+<p>JSON的嵌套</p>
+<button onClick="arrJson()" style="height: 40px; width: 100px; color: black; font-size: 12px;">点击</button>
+<p id="arrjson"></p>
+
+<br>
+<br>
+
+<p>JSON的日期异常</p>
+<button onClick="JsonDate()" style="height: 40px; width: 100px; color: black; font-size: 12px;">点击</button>
+<p id="jsondate"></p>
+
+<br>
+<br>
+
+<!--函数的闭包-->
+<p>函数的闭包</p>
+<button type="button" onClick="myFunction()">+</button>
+<p id="bibao">0</p>
+
+<br>
+<br>
+
+<!--DOM 元素 (节点的增，改，删)-->
+<p>DOM 元素 (节点的增，改，删)</p>
+<div id="nodediv" onClick="DomQueryNode()" style="background:#DC3F2B; width: 200px; height: 200px; text-align: center;">
+	<p id="p1">段落p1......</p>
+	<p id="p2">段落p2......</p>
+</div>
+
+
+<script type="text/javascript">
+	
+	/* 通过属性src改变图片*/
+	function changeImage(){
+		Element = document.getElementById("changeimg");
+		/* Element.src.match("me"):路径中包含“me”,就加载另一张图片，否则就加载“me”路径的图片。*/
+		if(Element.src.match("me")){
+			Element.src = "../img/2018-09-07_162441.png";
+		}else{
+			Element.src = "../img/me.jpg";
+		}
+	}
+	
+	/*通过事件onMouseOver/Out改变图片*/
+	/*鼠标移动到图片时*/
+	function changeOver(obj) {
+		obj.src = "../img/me.jpg";
+		obj.width = 60;
+	}
+	/*鼠标离开图片时*/
+	function changeOut(obj) {
+		obj.src = "../img/2018-09-07_162441.png";
+		obj.width = 40;
+	}
+	
+	/*通过事件onMouseDown/Up改变图片*/
+	/*长按图片时*/
+	function down(obj) {
+		obj.src = "../img/me.jpg";
+	}
+	/*松开图片时*/
+	function up(obj) {
+		obj.src = "../img/2018-09-07_162441.png";
+	}
+	
+	/*改变属性*/
+	function changeTag(){
+		Element = document.getElementById("changetag");
+		Element.style.color = "red"; //改变样式
+	}
+	
+	/*	事件监听addEventListener*/
+	document.getElementById("lisdiv").addEventListener("click",function() {
+		document.getElementById("hello").innerHTML = "hello";
+	});
+	
+	/*登陆验证*/
+	function Login(){
+		/*获得账号输入框的内容*/
+		var Element = document.getElementById("num").value;
+		/*获得密码输入内容*/
+		var pasElement = document.getElementById("pas").value;
+		/*输入的空格，或者连续空格,正则 
+			'g':全局匹配.
+			'i':对大小写不敏感的匹配。
+			'm':多行匹配。
+		*/
+		try{
+			
+			if(Element == null || Element.replace(/(^\s*)|(\s*$)/g,"") == "" || pasElement == null || pasElement.replace(/(^\s*)|(\s*$)/g,"") == ""){
+				throw "账号或密码不能为空或者空格！";
+			}
+			else if(isNaN(Element)){
+				throw "账号只能是数字！";
+			}
+			else if(Element.length < 8 || pasElement.length < 6){
+				throw "账号最小长度为8,密码的最小长度为6！";
+			}
+			else {
+				document.getElementById("p").innerHTML = "登陆成功！";
+			}
+		}catch(err){
+			// 1.弹出警告框。
+			/*alert(err);*/
+			// 2.写到 HTML 文档中。
+			/*document.write(err);*/
+			// 3.写入到 HTML 元素。
+			document.getElementById("p").innerHTML = err;
+			// 4.写入到浏览器的控制台。
+			/*console.log(err);*/
+		}
+		
+	}
+	
+	/*登陆表单验证*/
+	function LoginValidate(){
+		/*获得账号输入框的内容*/
+		var username = document.forms["LoginForm"]["username"].value;
+		/*获得密码输入内容*/
+		var password = document.forms["LoginForm"]["password"].value;
+		/*验证邮箱*/
+		var email = document.forms["LoginForm"]["email"].value;
+		/*必须包含 @ 符号和点号(.)*/
+		var atpos = email.indexOf("@");
+		var dotpos = email.lastIndexOf(".");
+		
+		try{
+			if(isNaN(username)){
+				throw "账号只能是数字！";
+			}
+			else if(username.length < 8){
+				throw "账号最小长度为8！";
+			}
+			else if(password.length < 6){
+				throw "密码的最小长度为6！";
+			}else if(atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= email.length){
+				// 必须包含 @ 符号和点号(.)。同时，@ 不可以是邮件地址的首字符，并且 @ 之后需有至少一个点号
+				throw "不是一个有效的Email地址！";
+			}else{
+				document.getElementById("msg").innerHTML = "登陆成功！";
+				return true;
+			}
+		}catch(err){
+			// 3.写入到 HTML 元素。
+			document.getElementById("msg").innerHTML = err;
+			return false;
+		}
+		
+	}
+	
+	/*switch 语句*/
+	function switchTest(){
+			var x;
+			var d = new Date().getDay();
+
+			switch(d){
+				case 6:x = "Sat";
+				break;
+				case 0:x = "Sun";
+				break;
+				default:
+					x = "期待周末！";
+			}
+			document.getElementById("switch").innerHTML = x;
+	}
+	
+	/*约束验证 DOM 方法*/
+	function LoginCheckValidity(){
+		var txt = "";
+
+		/*1.checkValidity验证:required*/
+		var rmb1 = document.getElementById("rmb1"); // 获得账号输入框的内容
+		if(rmb1.checkValidity() == false){
+			txt = rmb1.validationMessage;
+		} else {
+			txt = "转账成功！";
+		}
+		document.getElementById("rmb1msg").innerHTML = txt;
+		
+		/*2.checkValidity验证:validity 属性*/
+		var rmb2 = document.getElementById("rmb2"); // 获得金额输入框的内容
+		rmb2.setCustomValidity(""); // 取消自定义提示的方式
+		if(rmb2.value == null || rmb2.value == "") {
+			rmb2.setCustomValidity("请输入金额！");
+		} else if(rmb2.validity.rangeUnderflow) {
+			rmb2.setCustomValidity("金额不小于1元！");
+		} else if(rmb2.validity.rangeOverflow) {
+			rmb2.setCustomValidity("金额不大于200000万！");
+		} else {
+			rmb2.setCustomValidity("转账成功！");
+		}
+		document.getElementById("rmb2msg").innerHTML = rmb2.validationMessage;
+		
+	}
+	
+	/*JSON的转换*/
+	function Json() {
+			var text = '{"name":"Runoob", "url":"www.runoob.com"}'; // 创建 JavaScript 字符串，字符串为 JSON 格式的数据
+			
+			var arrText = '{ "sites" : [' +
+    					'{ "name":"Runoob" , "url":"www.runoob.com" },' +
+						'{ "name":"Google" , "url":"www.google.com" },' +
+						'{ "name":"Taobao" , "url":"www.taobao.com" } ]}'; // 数组中多个对象
+
+			obj = JSON.parse(text); // 使用 JavaScript 内置函数 JSON.parse() 将字符串转换为 JavaScript 对象
+
+			document.getElementById("json").innerHTML = obj.name + ":" + obj.url; // 使用新的 JavaScript 对象
+			document.getElementById("json").innerHTML = obj.sites[1].name + ":" + obj.sites[1].url;
+	}
+
+	/*json嵌套*/
+	function arrJson() {
+		var i, j, x = "";
+		// 设置json数据
+		var myObj = {
+			"name":"网站",
+			"num":3,
+			"sites": [
+				{ "name":"Google", "info":[ "Android", "Google 搜索", "Google 翻译" ] },
+				{ "name":"Taobao", "info":[ "淘宝", "网购" ] }
+			]
+		}
+
+		//  使用for-in 来访问数组
+		for (i in myObj.sites) {
+			x += "<h1>" + myObj.sites[i].name + "</h1>";
+			for (j in myObj.sites[i].info) {
+				x += myObj.sites[i].info[j] + "<br>";
+			}
+		}
+
+		document.getElementById("arrjson").innerHTML = x;
+	}
+	
+	/*json日期异常处理*/
+	function JsonDate(){
+		// json数据
+		var text = '{ "name":"Google", "Date":"2013-12-14", "site":"www.Google.com"}';
+		// 添加函数
+		var obj = JSON.parse(text, function(key, value){
+			if (key == "Date") {
+				return new Date(value);
+			} else {
+				return value;
+			}
+		});
+
+		document.getElementById("jsondate").innerHTML = obj.name + "日期：" + obj.Date;
+
+	}
+	
+	/*JavaScript函数闭包*/
+	/*函数的自我调用
+	1.变量 add 指定了函数自我调用的返回字值。 
+	2.自我调用函数只执行一次。设置 0。并返回函数表达式。
+	3.add变量可以作为一个函数使用。它可以访问函数上一层作用域的计数器。 
+	*/
+	var add = (function(){
+		var counter = 0;
+		return function(){return counter += 1;}
+	})();
+	/*闭包调用*/
+	function myFunction() {
+		document.getElementById("bibao").innerHTML = add();
+	}
+	
+	/*DOM 元素 (节点的增，改，删,查)*/
+	/*添加节点*/
+	function DOMAddNode() {
+		/*创建节点*/
+		var para = document.createElement("p"); // 创建标签p
+		var node = document.createTextNode("段落p3......"); // 创建节点内容
+		para.appendChild(node); // 添加节点内容到创建的标签中
+		
+		 /*添加新节点到父元素中*/
+		/*方法一：默认添加到尾部*/
+		var nodediv = document.getElementById("nodediv");
+		nodediv.appendChild(para);
+		
+		/*方法二：自定义添加*/
+		var para = document.createElement("p"); // 创建标签p
+		var node = document.createTextNode("段落p4......"); // 创建节点内容
+		para.appendChild(node); // 添加节点内容到创建的标签中
+		
+		var child = document.getElementById("p1");
+		nodediv.insertBefore(para, child); // 添加到p1的前边
+		
+	}
+	/*修改节点*/
+	function DOMUpdateNode() {
+		/*创建新节点*/
+		var para = document.createElement("p"); // 创建标签p
+		var child = document.createTextNode("新段落......"); // 创建节点内容
+		para.appendChild(child); // 添加节点内容到创建的标签中
+		
+		/*替换节点*/
+		var elemt = document.getElementById("nodediv"); // 找到父元素
+		var child = document.getElementById("p2"); // 找到节点
+		elemt.replaceChild(para, child);
+		
+	}
+	/*删除节点*/
+	function DOMDelNode() {
+		var elemt = document.getElementById("nodediv"); // 找到父元素
+		var child = document.getElementById("p2"); // 找到节点
+		elemt.removeChild(child); // 删除节点
+		
+	}
+	/*查询指定节点*/
+	function DomQueryNode() {
+		var elemt = document.getElementById("nodediv");
+		var nodeList = elemt.querySelectorAll("p");
+		
+		for(var i = 0; i < nodeList.length; i++) {
+			nodeList[i].style.color = "#FFF";
+		}
+	}
+	
+
+	</script>
+
+
+</body>
+</html>
